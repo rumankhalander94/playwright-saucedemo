@@ -6,4 +6,8 @@ export class CartPage {
   async expectProductVisible(name: string) {
     await expect(this.page.getByText(name)).toBeVisible();
   }
+
+  async checkout() {
+      await this.page.getByTestId('checkout').click();
+    }
 }
