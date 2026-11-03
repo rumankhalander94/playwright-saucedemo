@@ -1,13 +1,10 @@
 import { test } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
 import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
 
 test.beforeEach(async ({ page }) => {
-  const loginPage = new LoginPage(page);
-  await loginPage.goto();
-  await loginPage.login('standard_user', 'secret_sauce');
+  await page.goto('/inventory.html');
 });
 
 test('user can complete an order', async ({ page }) => {
