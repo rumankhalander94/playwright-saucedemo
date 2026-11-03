@@ -27,6 +27,8 @@ playwright.config.ts   Browsers, base URL, test id attribute, setup project
 - Cart: add a product, verify the cart badge, verify the product appears in the cart
 - Checkout: complete an order end to end, and a blank first name validation error
 - Cross-browser runs on Chromium, Firefox, and WebKit
+- Cart: add a product, verify the cart badge, verify the product appears in the cart, remove a product
+- Inventory: sort products Z to A, log out
 
 ## Design notes
 
