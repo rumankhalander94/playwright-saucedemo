@@ -11,9 +11,13 @@ UI test automation framework built with Playwright and TypeScript, testing the [
 ## Project structure
 
 ```
-pages/        Page objects (LoginPage, InventoryPage, CartPage)
-tests/        Test specs (login, inventory and cart)
-playwright.config.ts   Browsers, base URL, test id attribute
+pages/                 Page objects (LoginPage, InventoryPage, CartPage, CheckoutPage)
+tests/
+  auth.setup.ts        Logs in once and saves the session to .auth/user.json
+  login.spec.ts        Login tests (runs logged out)
+  inventory.spec.ts    Add to cart and cart tests
+  checkout.spec.ts     Checkout flow tests
+playwright.config.ts   Browsers, base URL, test id attribute, setup project
 .github/workflows/     CI pipeline
 ```
 
@@ -21,7 +25,15 @@ playwright.config.ts   Browsers, base URL, test id attribute
 
 - Login: successful login, wrong password, locked-out user, empty credentials
 - Cart: add a product, verify the cart badge, verify the product appears in the cart
+- Checkout: complete an order end to end, and a blank first name validation error
 - Cross-browser runs on Chromium, Firefox, and WebKit
+
+## Design notes
+
+- **Page Object Model:** locators and actions live in `pages/`, so tests read as user actions and a UI change is fixed in one place.
+- **Reusable login session:** a setup project logs in once and saves the browser state. Every browser project reuses it, so tests start already logged in instead of repeating the login through the UI. Login tests opt out, since they need to start logged out.
+- **Test ids:** `testIdAttribute` is set to `data-test` to match the site, so locators use `getByTestId`.
+- **Base URL:** set once in the config, and page objects navigate with relative paths.
 
 ## Getting started
 
