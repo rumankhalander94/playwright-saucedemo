@@ -1,5 +1,6 @@
 import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
+import { LoginPage } from '../pages/LoginPage';
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
@@ -40,4 +41,12 @@ test('products can be sorted Z to A', async ({ page }) => {
   const expected = [...names].sort().reverse();
   expect(names).toHaveLength(6);
   expect(names).toEqual(expected);
+});
+
+test('user can log out', async ({ page }) => {
+  const inventoryPage = new InventoryPage(page);
+  const loginPage = new LoginPage(page);
+
+  await inventoryPage.logout();
+  await loginPage.expectLoginPageVisible();
 });

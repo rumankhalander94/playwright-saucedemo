@@ -30,4 +30,9 @@
     async getProductNames(): Promise<string[]> {
       return await this.page.getByTestId('inventory-item-name').allTextContents();
     }
+
+    async logout() {
+      await this.page.getByRole('button', { name: 'Open Menu' }).click();
+      await this.page.getByTestId('logout-sidebar-link').click();
+    }
 }

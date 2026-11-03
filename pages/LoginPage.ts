@@ -15,4 +15,9 @@ import { Page, expect } from '@playwright/test';
            async expectError(message: string) {
                await expect(this.page.locator('[data-test="error"]')).toContainText(message);
             }
+
+           async expectLoginPageVisible() {
+             await expect(this.page.getByTestId('login-button')).toBeVisible();
+           }
+
         }
